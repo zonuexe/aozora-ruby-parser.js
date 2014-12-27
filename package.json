@@ -1,0 +1,25 @@
+{
+  "name": "aozora-ruby-parser",
+  "version": "0.0.1",
+  "description": "Aozora-bunko ruby parser",
+  "main": "src/index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zonuexe/aozora-ruby-parser.js"
+  },
+  "keywords": [
+    "novel"
+  ],
+  "author": "USAMI Kenta <tadsan@zonu.me>",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
