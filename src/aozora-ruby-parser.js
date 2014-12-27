@@ -26,6 +26,9 @@
     AozoraRubyParser["prototype"]["parse"] = parseRegExp;
     /** AozoraRubyParser#parseRegex():void */
     AozoraRubyParser["prototype"]["parseRegExp"] = parseRegExp;
+    /** AozoraRubyParser#render(template:object):string */
+    AozoraRubyParser["prototype"]["render"] = render;
+
     AozoraRubyParser["TextNode"] = TextNode;
     AozoraRubyParser["RubyNode"] = RubyNode;
 
@@ -55,6 +58,27 @@
         }
 
         this.nodes = nodes;
+    }
+
+    function render(template) {
+        var node;
+        var text = "";
+
+        for (var i = 0; i < this.nodes.length ; i++) {
+            node = this.nodes[i];
+            switch (node.type) {
+            case "text":
+                text += node.text;
+                break;
+            case "ruby":
+                text += template.rt(node);
+                break;
+            default:
+                break;
+            }
+        }
+
+        return text;
     }
 
     if ("process" in global) {

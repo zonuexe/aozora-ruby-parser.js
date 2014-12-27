@@ -1,31 +1,21 @@
+/**
+ * aozora-ruby-pixiv.js
+ *
+ * Copyright 2014 USAMI Kenta <tadsan@zonu.me>
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 (function(global) {
     "use strict";
 
     function AozoraRuby_pixivConverter() {
     };
 
-    function exports(nodes) {
-        var text = "";
+    /** AozoraRubyParser#rt(node:object) */
+    AozoraRuby_pixivConverter["prototype"]["rt"] = rt;
 
-        for (var i = 0; i < nodes.length ; i++) {
-            var node = nodes[i];
-            switch (node.type) {
-            case "text":
-                text += node.text;
-                break;
-            case "ruby":
-                text += "[[rb:" + node.text + " > " + node.rt + "]]";
-                break;
-            default:
-                break;
-            }
-        }
-
-        return text;
+    function rt(node) {
+        return "[[rb:" + node.text + " > " + node.rt + "]]";
     }
-
-    /** AozoraRubyParser#export():void */
-    AozoraRuby_pixivConverter["prototype"]["exports"] = exports;
 
     global["AozoraRuby_pixivConverter"] = AozoraRuby_pixivConverter;
 })((this || 0).self || global);

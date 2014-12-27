@@ -9,20 +9,6 @@
 <script type="application/javascript" src="../src/aozora-ruby-pixiv.js"></script>
 <script type="application/javascript">
 (function(){
-function setTextArea(id, content)
-{
-    "use strict";
-    var base = document.getElementById(id);
-    for (var n = 0; base.children.length; n++) {
-        if (base.children[n].tagName === 'TEXTAREA') {
-            base.children[n].value = content;
-            return true;
-        }
-    }
-
-    return false;
-}
-
 function getTextArea(id)
 {
     "use strict";
@@ -40,8 +26,8 @@ function updateAozora() {
     "use strict";
     var parser = new AozoraRubyParser(getTextArea("aozora").value);
     parser.parse();
-    setTextArea("html",  (new AozoraRubyHTMLConverter).exports(parser.nodes));
-    setTextArea("pixiv", (new AozoraRuby_pixivConverter).exports(parser.nodes));
+    getTextArea("html").value  = parser.render(new AozoraRubyHTMLConverter);
+    getTextArea("pixiv").value = parser.render(new AozoraRuby_pixivConverter);
 }
 
 setTimeout(function() {
