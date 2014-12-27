@@ -1,5 +1,7 @@
 # aozora-ruby-parser
 
+[![Build Status](https://travis-ci.org/zonuexe/aozora-ruby-parser.js.svg)](https://travis-ci.org/zonuexe/aozora-ruby-parser.js)
+
 青空文庫っぽい記法のルビを解釈するよ
 
 ## 文法
