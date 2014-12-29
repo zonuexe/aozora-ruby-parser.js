@@ -1,0 +1,23 @@
+{
+  "name": "aozora-ruby-parser",
+  "version": "0.0.1",
+  "main": [
+    "./aozora-ruby-parser.js"
+   ,"./aozora-ruby-html.js"
+   ,"./aozora-ruby-pixiv.js"
+  ],
+  "homepage": "https://github.com/zonuexe/aozora-ruby-parser.js",
+  "authors": [
+    "USAMI Kenta <tadsan@zonu.me>"
+  ],
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+  }
+}
