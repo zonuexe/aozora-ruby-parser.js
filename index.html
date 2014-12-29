@@ -13,6 +13,7 @@ textarea { width: 100%; height: 5em; }
 <script src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.min.js"></script>
 <script src="./src/aozora-ruby-parser.js"></script>
 <script src="./src/aozora-ruby-pixiv.js"></script>
+<script src="./src/aozora-ruby-html.js"></script>
 
 <script type="application/javascript">
 $(function() {
@@ -22,11 +23,30 @@ $(function() {
     var $up = $("#upload-pixiv");
     var $pixiv = $("#pixiv-textarea");
     var $aozora = $("#aozora-textarea");
+    var $preview = $("#preview-text");
+    var pixiv_converter = new AozoraRuby_pixivConverter;
+    var html_converter  = new AozoraRubyHTMLConverter('(', ')');
+
+    var p = "<ruby>$1<rp>$2</rp><rt>$3</rt><rp>$4</rp></ruby>";
+    var unescape_ruby = new RegExp(
+        p.replace(/\$\d/g, "([^<>]+)")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;"), "g");
+    var escapeHTML =function(src) {
+        var escaped = $("<div>").text(src).html();
+        return escaped.replace(unescape_ruby, p);
+    };
 
     var updateAozora = function() {
         var parser = new AozoraRubyParser($aozora[0].value);
         parser.parse();
-        $pixiv[0].value = parser.render(new AozoraRuby_pixivConverter);
+        $pixiv[0].value = parser.render(pixiv_converter);
+        $preview.html(escapeHTML(parser.render(html_converter)));
+    };
+
+    var touch_upload = "http://touch.pixiv.net/novel/upload.php";
+    if ((/Android|iPhone|iPad/g).test(window.navigator.userAgent)) {
+        $("#upload-pixiv-href").attr("href", touch_upload);
     }
 
     updateAozora();
@@ -59,9 +79,17 @@ $(function() {
 </div>
 </section>
 
-<a href="http://www.pixiv.net/novel/upload.php"><div class="well well-lg" id="upload-pixiv" style="display: none;">
+<a href="http://www.pixiv.net/novel/upload.php" id="upload-pixiv-href"><div class="well well-lg" id="upload-pixiv" style="display: none;">
     <p><strong>pixiv小説に投稿する</strong></p>
 </div></a>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">プレビュー</div>
+    <div class="panel-body">
+        <div id="preview-text"></div>
+    </div>
+</div>
+</section>
 
 <footer>
     <p>Fork me! <a href="https://github.com/zonuexe/aozora-ruby-parser.js">zonuexe/aozora-ruby-parser.js</a></p>
