@@ -18,8 +18,9 @@
     AozoraRubyHTMLConverter["prototype"]["rt"] = rt;
 
     function rt(node) {
-        return "<ruby>" + node.text +
-            this.open_rp + node.rt + this.close_rp + "</ruby>";
+        return "<ruby>" + node.text +this.open_rp +
+            "<rt>" + node.rt + "</rt>" +
+            this.close_rp + "</ruby>";
     }
 
     global["AozoraRubyHTMLConverter"] = AozoraRubyHTMLConverter;
