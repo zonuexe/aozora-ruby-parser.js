@@ -34,7 +34,7 @@ $(function() {
          .replace(/>/g, "&gt;"), "g");
     var escapeHTML =function(src) {
         var escaped = $("<div>").text(src).html();
-        return escaped.replace(unescape_ruby, p);
+        return escaped.replace(unescape_ruby, p).replace(/\n/g, "<br>");
     };
 
     var updateAozora = function() {
@@ -57,7 +57,7 @@ $(function() {
 
 <section>
 <div class="page-header">
-    <h1>青空文庫→pixiv変換器 <br><small>青空文庫のルビをpixiv形式に変換</small></h1>
+    <h1>青空文庫→pixiv変換 <br><small>青空の<ruby>ルビ<rp>(</rp><rt>ふりがな</rt><rp>)</rp></ruby>をpixiv形式に</small></h1>
 </div>
 
 <div class="panel panel-info">
@@ -83,10 +83,10 @@ $(function() {
     <p><strong>pixiv小説に投稿する</strong></p>
 </div></a>
 
-<div class="panel panel-primary">
+<div class="panel panel-success">
     <div class="panel-heading">プレビュー</div>
     <div class="panel-body">
-        <div id="preview-text"></div>
+        <p id="preview-text"></p>
     </div>
 </div>
 </section>
