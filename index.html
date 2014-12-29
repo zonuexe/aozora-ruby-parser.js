@@ -56,8 +56,13 @@ $(function() {
 
     updateAozora();
     $aozora.on("keyup", updateAozora);
-    $pixiv.on("click", function(){ $up.show() });
-    $("#copy-pixiv").on("click", function(){ $up.show() });
+    $aozora.focusout(updateAozora);
+    $pixiv.focus(function(){ $(this).select(); } );
+    $pixiv.on("click", function(){ $up.show(); });
+    clip.on("ready", function(){
+        $("#copy-pixiv").show();
+        clip.on("copy",  function(){ $up.show(); });
+    });
 });</script>
 
 <section>
@@ -78,7 +83,7 @@ $(function() {
     <div class="panel-body">
         <fieldset id="pixiv" class="input-group">
             <textarea id="pixiv-textarea" placeholder="ここにpixiv記法に変換された小説が表示されます"></textarea>
-            <button id="copy-pixiv" data-clipboard-target="pixiv-textarea">クリップボードにコピー</button>
+            <button id="copy-pixiv" data-clipboard-target="pixiv-textarea" style="display: none">クリップボードにコピー</button>
         </fieldset>
     </div>
 </div>
