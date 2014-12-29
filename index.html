@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>青空文庫→pixiv 変換器</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<style>
+textarea { width: 100%; height: 5em; }
+#upload-pixiv strong { font-size: x-large }
+</style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.min.js"></script>
+<script src="./src/aozora-ruby-parser.js"></script>
+<script src="./src/aozora-ruby-pixiv.js"></script>
+
+<script type="application/javascript">
+$(function() {
+    "use strict";
+
+    var clip = new ZeroClipboard(document.getElementById("copy-pixiv"));
+    var $up = $("#upload-pixiv");
+    var $pixiv = $("#pixiv-textarea");
+    var $aozora = $("#aozora-textarea");
+
+    var updateAozora = function() {
+        var parser = new AozoraRubyParser($aozora[0].value);
+        parser.parse();
+        $pixiv[0].value = parser.render(new AozoraRuby_pixivConverter);
+    }
+
+    updateAozora();
+    $aozora.on("keyup", updateAozora);
+    $pixiv.on("click", function(){ $up.show() });
+    $("#copy-pixiv").on("click", function(){ $up.show() });
+});</script>
+
+<section>
+<div class="page-header">
+    <h1>青空文庫→pixiv変換器 <br><small>青空文庫のルビをpixiv形式に変換</small></h1>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">青空</div>
+    <div class="panel-body">
+        <fieldset id="aozora" class="input-group">
+            <textarea id="aozora-textarea" placeholder="ここに小説を貼り付けてください"></textarea>
+        </fieldset>
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">pixiv</div>
+    <div class="panel-body">
+        <fieldset id="pixiv" class="input-group">
+            <textarea id="pixiv-textarea" placeholder="ここにpixiv記法に変換された小説が表示されます"></textarea>
+            <button id="copy-pixiv" data-clipboard-target="pixiv-textarea">クリップボードにコピー</button>
+        </fieldset>
+    </div>
+</div>
+</section>
+
+<a href="http://www.pixiv.net/novel/upload.php"><div class="well well-lg" id="upload-pixiv" style="display: none;">
+    <p><strong>pixiv小説に投稿する</strong></p>
+</div></a>
+
+<footer>
+    <p>Fork me! <a href="https://github.com/zonuexe/aozora-ruby-parser.js">zonuexe/aozora-ruby-parser.js</a></p>
+</footer>
