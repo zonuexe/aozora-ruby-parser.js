@@ -1,6 +1,6 @@
 {
   "name": "aozora-ruby-parser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Aozora-bunko ruby parser",
   "main": "src/index.js",
   "scripts": {

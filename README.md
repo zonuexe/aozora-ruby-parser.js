@@ -24,6 +24,22 @@
 
 `TextNode`は`text`プロパティを、`RubyNode`は`text`プロパティ及び`rt`プロパティを持ちます。(すべてのノードの`text`プロパティを結合することで、原文からふりがなを省いたテキストを得ることができます)
 
+## インストール
+
+### Bower
+
+```
+bower install aozora-ruby-parser
+```
+
+### npm
+
+Node.js でちゃんと動くかはよくわかんない
+
+```
+npm install aozora-ruby-parser
+```
+
 ## 著作権
 
 本リポジトリに含まれるファイルは以下の条件に基き配布されます。 (後述の`sim2ruby.css`を除く)
