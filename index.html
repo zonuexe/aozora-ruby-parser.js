@@ -33,7 +33,7 @@ $(function() {
     var html_converter  = new AozoraRubyHTMLConverter('(', ')');
     var preview_empty = $preview.html();
 
-    var p = "<ruby>$1<rp>$2</rp><rt>$3</rt><rp>$4</rp></ruby>";
+    var p = "<ruby><rb>$1</rb><rp>$2</rp><rt>$3</rt><rp>$4</rp></ruby>";
     var unescape_ruby = new RegExp(
         p.replace(/\$\d/g, "([^<>]+)")
          .replace(/</g, "&lt;")
@@ -57,12 +57,13 @@ $(function() {
 
     updateAozora();
     $aozora.on("keyup", updateAozora);
+    $aozora.focus(function(){ $up.hide(); });
     $aozora.focusout(updateAozora);
     $pixiv.focus(function(){ $(this).select(); } );
-    $pixiv.on("click", function(){ $up.show(); });
+    $pixiv.on("click", function(){ $aozora[0].value && $up.show(); });
     clip.on("ready", function(){
         $("#copy-pixiv").show();
-        clip.on("copy",  function(){ $up.show(); });
+        clip.on("copy",  function(){ $aozora[0].value && $up.show(); });
     });
 });</script>
 
