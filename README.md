@@ -26,6 +26,8 @@
 
 ## 著作権
 
+本リポジトリに含まれるファイルは以下の条件に基き配布されます。 (後述の`sim2ruby.css`を除く)
+
 ```
 aozora-ruby-parser.js
 Copyright 2014 USAMI Kenta <tadsan@zonu.me>
@@ -42,3 +44,31 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+### sim2ruby.css
+
+`sim2ruby.css` は http://roheisen.net/dl/sim2ruby.css を改変したものです。
+
+> #### 名称
+>
+> <ruby><rb>sim2ruby.css</rb><rp> | </rp><rt>シム・トゥ・ルビー・シーエスエス</rt></ruby>
+>
+> `sim2ruby.css` = a cascading style sheet to simulate simple ruby.
+>
+> #### 機能概要
+>
+> IE以外のブラウザでもルビタグ（振り仮名表示機能）を同じように機能させるCSSです。
+> “simulate simple ruby”の名前の通り、rtcやrbcなどの複雑ルビには未対応です。
+>
+> #### 著作概要
+>
+> * 作者 : <ruby><rb>MMZK</rb><rp> | </rp><rt>みみずく</rt></ruby>
+> * 所属 : <ruby><rb>銑鉄計画</rb><rp> | </rp><rt>ローアイゼン・プロイェクト</rt></ruby>
+> * 拠点 : <a href="http://roheisen.net/"><ruby><rb>銑鉄網</rb><rp> | </rp><rt>ローアイゼン・ネッツ</rt></ruby></a>
+> * 版 : 皇紀2671年04月26日版 ver.1.0.4
+>
+> #### 使用条件
+>
+> 個人・法人・営利・非営利問わずご自由にお使いください。
+> 邪魔ならここの枠を丸ごと消してしまっても結構です。
+> ただし、虚偽の著作主張だけはご勘弁願います。
