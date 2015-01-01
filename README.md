@@ -4,6 +4,12 @@
 
 青空文庫っぽい記法のルビを解釈するよ
 
+## オンラインデモ
+
+続きはウェブで
+
+[![Screen shot](http://zonuexe.github.io/aozora-ruby-parser.js/screenshot.png)](http://zonuexe.github.io/aozora-ruby-parser.js/)
+
 ## 文法
 
 [青空文庫工作員作業マニュアル 2.入力-1](http://www.aozora.gr.jp/KOSAKU/MANUAL_2.html)にある仕様のうち、ルビのみをサポートします。その他の記法(見出しや傍点など)は、何も加工しません。
