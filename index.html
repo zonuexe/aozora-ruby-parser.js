@@ -31,6 +31,7 @@ $(function() {
     var $preview = $("#preview-text");
     var pixiv_converter = new AozoraRuby_pixivConverter;
     var html_converter  = new AozoraRubyHTMLConverter('(', ')');
+    var preview_empty = $preview.html();
 
     var p = "<ruby>$1<rp>$2</rp><rt>$3</rt><rp>$4</rp></ruby>";
     var unescape_ruby = new RegExp(
@@ -46,7 +47,7 @@ $(function() {
         var parser = new AozoraRubyParser($aozora[0].value);
         parser.parse();
         $pixiv[0].value = parser.render(pixiv_converter);
-        $preview.html(escapeHTML(parser.render(html_converter)));
+        $preview.html(escapeHTML(parser.render(html_converter)) || preview_empty);
     };
 
     var touch_upload = "http://touch.pixiv.net/novel/upload.php";
@@ -96,7 +97,7 @@ $(function() {
 <div class="panel panel-success">
     <div class="panel-heading">プレビュー</div>
     <div class="panel-body">
-        <p id="preview-text"></p>
+        <p id="preview-text"><span style="color: #999">ここに<ruby><rb>実際</rb><rp>(</rp><rt>じっさい</rt><rp>)</rp></ruby>の<ruby><rb>表示</rb><rp>(</rp><rt>ひょうじ</rt><rp>)</rp></ruby>がでます</span></p>
     </div>
 </div>
 </section>
