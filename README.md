@@ -12,17 +12,44 @@
 
 ## 文法
 
-[青空文庫工作員作業マニュアル 2.入力-1](http://www.aozora.gr.jp/KOSAKU/MANUAL_2.html)にある仕様のうち、ルビのみをサポートします。その他の記法(見出しや傍点など)は、何も加工しません。
+[青空文庫工作員作業マニュアル 2.入力-1](http://www.aozora.gr.jp/KOSAKU/MANUAL_2.html)にある仕様のうち、ルビと`［改ページ］`タグのみをサポートします。その他の記法(見出しや傍点など)は、何も加工しません。
 
 実際のところ、このライブラリは青空文庫の記法に厳格に従ったものではありません。JIS漢字コード (JIS X 0201, JIS X 0208, JIS X 0213) を前提とする青空文庫に対して、入出力に Unicode を許容すると、その性質上、「文字種」の定義が煩雑になるからです。
 
 そのため、本ライブラリでルビの始点指示`｜`なしで利用できるのは漢字とASCIIの範囲のアルファベットと数字、全角アルファベットと数字のみです。一部の処理系との互換性のため、ひらがなカタカナを始点指示`｜`なしでルビに分解することはありません。
 
-## 出力形式
+このパーサーが保証する入力と出力は[`test/parseRegExpTest.js`](https://github.com/zonuexe/aozora-ruby-parser.js/blob/master/test/parseRegExpTest.js)を参照してください。
 
-パースに成功すると、オブジェクトの配列を返します。オブジェクトは`TextNode`と`RubyNode`の二種類です。ノードの種類は`type`プロパティの文字列`text|ruby`で判定することができます。
+## API
 
-`TextNode`は`text`プロパティを、`RubyNode`は`text`プロパティ及び`rt`プロパティを持ちます。(すべてのノードの`text`プロパティを結合することで、原文からふりがなを省いたテキストを得ることができます)
+* `parser = new AozoraRubyParser(input_text: string)`
+  * パーサーオブジェクトを生成します
+* `parser.perse()`
+  * パース処理を実行します。<br>
+    副作用として`parse.nodes`にパースされたオブジェクトの配列がセットされます
+* `parser.render(template: object): string`
+  * `template`で渡されたオブジェクトに実装されたメソッドを利用してノードを文字列化して一つの文字列に結合します
+
+## 出力
+
+パースに成功すると、オブジェクトの配列を生成します。オブジェクトは`TextNode`と`RubyNode`と`NewpageNode`の三種類です。ノードの種類は`type`プロパティの文字列`text|ruby|newline`で判定することができます。
+
+全ての種類のノードは`text`プロパティを持ちます。また、`RubyNode`は`rt`プロパティを持ちます。すべてのノードの`text`プロパティを結合することで、原文からふりがなを省いたテキストを得ることができます。
+
+### フォーマットを追加する
+
+`node.type`と同じ名前のメソッドを持ったオブジェクト(変換器)を `parser.render()` に渡してやることで、独自のフォーマットに変換することができます。
+
+このライブラリに付属する変換器は拡張性を持たせるために`new AozoraRubyHTMLConverter`のように初期化しますが、単純な変換器は以下のようにシンプルな実装で十分です。
+
+```
+var simple_converter = {
+    text: function(node){ return node.text; },
+    ruby: function(node){ return node.text + "(" + node.rt + ")"; },
+    newpage: function(node){ return "\n\n"; }
+}
+var output = parser.render(simple_converter));
+```
 
 ## インストール
 
