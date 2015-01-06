@@ -40,7 +40,9 @@ $(function() {
          .replace(/>/g, "&gt;"), "g");
     var escapeHTML =function(src) {
         var escaped = $("<div>").text(src).html();
-        return escaped.replace(unescape_ruby, p).replace(/\n/g, "<br>");
+        return escaped.replace(unescape_ruby, p).
+                       replace(/&lt;hr&gt;/g, "<hr>").
+                       replace(/\n/g, "<br>");
     };
 
     var updateAozora = function() {

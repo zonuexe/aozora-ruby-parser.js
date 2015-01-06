@@ -127,5 +127,56 @@ describe("AozoraRubyParser", function() {
             ];
             assertNodes(expected, src);
         });
+        it("［＃改ページ］タグのみ", function() {
+            var src = "［＃改ページ］";
+            var expected = [
+                { },
+            ];
+            assertNodes(expected, src);
+        });
+        it("［＃改ページ］から始まる", function() {
+            var src = "［＃改ページ］あいうえお";
+            var expected = [
+                { },
+                { text: "あいうえお" },
+            ];
+            assertNodes(expected, src);
+        });
+        it("［＃改ページ］で終る", function() {
+            var src = "あいうえお［＃改ページ］";
+            var expected = [
+                { text: "あいうえお" },
+                { },
+            ];
+            assertNodes(expected, src);
+        });
+        it("ルビ対象の中に［＃改ページ］", function() {
+            var src = "｜［＃改ページ］《ふりがな》";
+            var expected = [
+                { text: "［＃改ページ］", rt: "ふりがな" },
+            ];
+            assertNodes(expected, src);
+        });
+        it("ルビ読みの中に［＃改ページ］", function() {
+            var src = "漢字《［＃改ページ］》";
+            var expected = [
+                { text: "漢字", rt: "［＃改ページ］" },
+            ];
+            assertNodes(expected, src);
+        });
+        it("ルビと改ページ", function() {
+            var src = "漢字《かんじ》［＃改ページ］ひらがな［＃改ページ］カタカナ、そして漢字《かんじ》再《ふたた》び";
+            var expected = [
+                { text: "漢字", rt: "かんじ" },
+                { },
+                { text: "ひらがな" },
+                { },
+                { text: "カタカナ、そして" },
+                { text: "漢字", rt: "かんじ" },
+                { text: "再", rt: "ふたた" },
+                { text: "び" },
+            ];
+            assertNodes(expected, src);
+        });
     });
 });

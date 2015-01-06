@@ -10,11 +10,20 @@
     function AozoraRuby_pixivConverter() {
     };
 
-    /** AozoraRubyParser#rt(node:object) */
-    AozoraRuby_pixivConverter["prototype"]["rt"] = rt;
+    AozoraRuby_pixivConverter["prototype"]["text"] = text;
+    AozoraRuby_pixivConverter["prototype"]["ruby"] = ruby;
+    AozoraRuby_pixivConverter["prototype"]["newpage"] = newpage;
 
-    function rt(node) {
+    function text(node) {
+        return node.text;
+    }
+
+    function ruby(node) {
         return "[[rb:" + node.text + " > " + node.rt + "]]";
+    }
+
+    function newpage(node) {
+        return "[newpage]";
     }
 
     global["AozoraRuby_pixivConverter"] = AozoraRuby_pixivConverter;

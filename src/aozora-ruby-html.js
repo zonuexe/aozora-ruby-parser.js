@@ -14,13 +14,22 @@
         this.close_rp = "<rp>" + close_rp + "</rp>";
     };
 
-    /** AozoraRubyHTMLConverter#rt(node:object):string */
-    AozoraRubyHTMLConverter["prototype"]["rt"] = rt;
+    AozoraRubyHTMLConverter["prototype"]["text"] = text;
+    AozoraRubyHTMLConverter["prototype"]["ruby"] = ruby;
+    AozoraRubyHTMLConverter["prototype"]["newpage"] = newpage;
 
-    function rt(node) {
+    function text(node) {
+        return node.text;
+    }
+
+    function ruby(node) {
         return "<ruby><rb>" + node.text + "</rb>" +
             this.open_rp + "<rt>" + node.rt + "</rt>" +
             this.close_rp + "</ruby>";
+    }
+
+    function newpage(node) {
+        return "<hr>";
     }
 
     global["AozoraRubyHTMLConverter"] = AozoraRubyHTMLConverter;
