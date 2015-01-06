@@ -32,7 +32,7 @@
     AozoraRubyParser["TextNode"] = TextNode;
     AozoraRubyParser["RubyNode"] = RubyNode;
 
-    var pattern = '(?:((?:[一-龠々仝〆〇ヶ]|[-_@0-9a-zA-Z]|[—―＿＠０-９Ａ-Ｚａ-ｚ])+)|｜([^｜《》\n\r]+))《([^｜《》\n\r]+)》';
+    var pattern = '(?:((?:[一-龠々仝〆〇ヶ]|[-_@0-9a-zA-Z]|[—―＿＠０-９Ａ-Ｚａ-ｚ])+)|[|｜]([^｜《》\n\r]+))《([^｜《》\n\r]+)》';
     function parseRegExp() {
         var re = new RegExp(pattern, 'g');
         var nodes = [];

@@ -24,6 +24,15 @@ describe("AozoraRubyParser", function() {
             ];
             assertNodes(expected, src);
         });
+        it("半角棒ルビで英文にまとめてルビがつけられる", function() {
+            var src = "彼は |Au revoir《さらば》 と、";
+            var expected = [
+                { text: '彼は ' },
+                { text: 'Au revoir', rt: 'さらば' },
+                { text: ' と、' },
+            ];
+            assertNodes(expected, src);
+        });
         it("一行に漢字のみルビと棒ルビが両方ある", function() {
             var src = "お前は今日から｜愛飢男《あいうえお》だ。いいな、柿公家子《かきくけこ》";
             var expected = [
