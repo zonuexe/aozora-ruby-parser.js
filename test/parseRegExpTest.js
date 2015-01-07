@@ -178,5 +178,64 @@ describe("AozoraRubyParser", function() {
             ];
             assertNodes(expected, src);
         });
+
+        it("サロゲートペア文字列のみ", function() {
+            var src = "𝄞";
+            var expected = [
+                { text: "𝄞" },
+            ];
+            assertNodes(expected, src);
+        });
+
+        it("サロゲートペア文字列のルビのみ", function() {
+            var src = "|𝄞《𝄞》";
+            var expected = [
+                { text: "𝄞", rt: "𝄞" },
+            ];
+            assertNodes(expected, src);
+        });
+
+        it("サロゲートペア文字列のルビの前に非サロゲートペア", function() {
+            var src = "あ|𝄞《𝄞》";
+            var expected = [
+                { text: "あ" },
+                { text: "𝄞", rt: "𝄞" },
+            ];
+            assertNodes(expected, src);
+        });
+
+        it("サロゲートペア文字列のルビの後に非サロゲートペア", function() {
+            var src = "|𝄞《𝄞》あ";
+            var expected = [
+                { text: "𝄞", rt: "𝄞" },
+                { text: "あ" },
+            ];
+            assertNodes(expected, src);
+        });
+
+        it("サロゲートペア文字列のルビの前後に非サロゲートペア", function() {
+            var src = "あ|𝄞《𝄞》あ";
+            var expected = [
+                { text: "あ" },
+                { text: "𝄞", rt: "𝄞" },
+                { text: "あ" },
+            ];
+            assertNodes(expected, src);
+        });
+
+        it("サロゲートペア文字列のルビの複雑な組合せ", function() {
+            var src = "𝄞あ𝄞あ|𝄞《𝄞》あ漢字《𝄞》|𝄞《ああ𝄞あ》ああ𝄞あ|あいう《𝄞》漢字𝄞あ";
+            var expected = [
+                { text: "𝄞あ𝄞あ" },
+                { text: "𝄞", rt: "𝄞" },
+                { text: "あ" },
+                { text: "漢字", rt: "𝄞" },
+                { text: "𝄞", rt: "ああ𝄞あ" },
+                { text: "ああ𝄞あ" },
+                { text: "あいう", rt: "𝄞" },
+                { text: "漢字𝄞あ" },
+            ];
+            assertNodes(expected, src);
+        });
     });
 });
